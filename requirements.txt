@@ -1,1 +1,1 @@
-pip install uvicorn fastapi mediapipe opencv-python
+pip install uvicorn fastapi mediapipe opencv-python;
