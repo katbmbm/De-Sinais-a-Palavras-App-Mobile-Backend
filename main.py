@@ -1,11 +1,11 @@
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Body
 from fastapi.responses import JSONResponse
 import json
 import os
 import requests
 from io import BytesIO
 from PIL import Image
-from cont_dedos import contar_dedos  # Importar apenas a função para n pegar o módulo MediaPipe
+from cont_dedos import contar_dedos
 
 app = FastAPI()
 
@@ -16,8 +16,8 @@ TEMP_IMG_PATH = os.path.join(os.path.dirname(__file__), "temp_img.jpg")
 def read_root():
     return {"message": "API de Contagem de Dedos"}
 
-@app.get("/processar")
-def processar_imagem(img_path: str = Query(..., description="Caminho da imagem ou URL")):
+@app.post("/processar")
+def processar_imagem(img_path: str = Body(..., embed=True)):
     try:
         # Check if img_path is a URL
         if img_path.startswith("http://") or img_path.startswith("https://"):
