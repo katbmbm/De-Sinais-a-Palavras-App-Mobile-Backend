@@ -27,7 +27,7 @@ def processar_imagem(img_path: str = Query(..., description="Caminho da imagem o
             image = Image.open(BytesIO(response.content))
             image.save(TEMP_IMG_PATH)
             contar_dedos(TEMP_IMG_PATH)
-            os.remove(TEMP_IMG_PATH)  # Clean up temp file
+            os.remove(TEMP_IMG_PATH)
         else:
             if not os.path.exists(img_path):
                 return JSONResponse(status_code=404, content={"error": f"Image not found: {img_path}"})
@@ -41,3 +41,5 @@ def processar_imagem(img_path: str = Query(..., description="Caminho da imagem o
         return JSONResponse(status_code=404, content={"error": str(e)})
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+
