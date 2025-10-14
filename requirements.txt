@@ -2,3 +2,5 @@ uvicorn
 fastapi
 mediapipe
 opencv-python
+requests
+Pillow
