@@ -2,7 +2,7 @@ from fastapi import FastAPI, Body
 from fastapi.responses import JSONResponse
 import json
 import os
-import requests
+import base64
 from io import BytesIO
 from PIL import Image
 from cont_dedos import contar_dedos
@@ -12,32 +12,27 @@ app = FastAPI()
 JSON_PATH = os.path.join(os.path.dirname(__file__), "count.json")
 TEMP_IMG_PATH = os.path.join(os.path.dirname(__file__), "temp_img.jpg")
 
-@app.get("/")
-def read_root():
-    return {"message": "API de Contagem de Dedos"}
-
 @app.post("/processar")
-def processar_imagem(img_path: str = Body(..., embed=True)):
+def processar_imagem(image: str = Body(..., embed=True)):
     try:
-        # Check if img_path is a URL
-        if img_path.startswith("http://") or img_path.startswith("https://"):
-            response = requests.get(img_path)
-            if response.status_code != 200:
-                return JSONResponse(status_code=404, content={"error": f"Could not download image: {img_path}"})
-            image = Image.open(BytesIO(response.content))
-            image.save(TEMP_IMG_PATH)
-            contar_dedos(TEMP_IMG_PATH)
-            os.remove(TEMP_IMG_PATH)
-        else:
-            if not os.path.exists(img_path):
-                return JSONResponse(status_code=404, content={"error": f"Image not found: {img_path}"})
-            contar_dedos(img_path)
+        # Decode base64 string
+        try:
+            image_data = base64.b64decode(image.split(",")[-1])  # Handles optional data URI prefix
+        except Exception as e:
+            return JSONResponse(status_code=400, content={"error": "Invalid base64 image data"})
 
+        # Save to temp file
+        image_file = Image.open(BytesIO(image_data))
+        image_file.save(TEMP_IMG_PATH)
+
+        # Process image
+        contar_dedos(TEMP_IMG_PATH)
+        os.remove(TEMP_IMG_PATH)
+
+        # Return result
         with open(JSON_PATH, "r") as f:
             data = json.load(f)
         return data
 
-    except FileNotFoundError as e:
-        return JSONResponse(status_code=404, content={"error": str(e)})
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
