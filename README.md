@@ -7,7 +7,7 @@
 ```
 uvicorn main:app --reload
 ```
-- No browser, rodar o url:
+- No browser, rodar o URL:
 ```
 http://127.0.0.1:8000/processar?img_path=minhaImagem.jpg
 ```
