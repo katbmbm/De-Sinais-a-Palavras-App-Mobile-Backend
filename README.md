@@ -1,5 +1,5 @@
 # Parte Backend do aplicativo De Sinais a Palavras
-- Este repositório contém códigos do backend de um aplicativo móvel que estão hospedados no Render. Ele realiza a contagem de dedos levantados.
+Este repositório contém códigos do backend de um aplicativo móvel que estão hospedados no Render. Ele realiza a contagem de dedos levantados.
 ## Como rodar a API:
 - Clonar os arquivos do repositório para uma pasta na sua máquina
 - Rodar no terminal da pasta:
