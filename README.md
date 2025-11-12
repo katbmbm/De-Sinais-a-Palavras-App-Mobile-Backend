@@ -34,4 +34,4 @@ MediaPipe) e modelos de Machine Learning (TensorFlow, Teachable Machine)
 usuários
 
 ### Interação
-- Para começar a interação entre o fontend e o backend decidimos fazer o aplicativo contar os dedos. Primeiro pegamos um código de python que já tínhamos que faz essa contagem e transformamos em api, hospedamos essa api no render, que é um site que faz hospedagem gratuita. E com a ajuda do andré foi feito uma aplicação react que manda os dados da câmera em forma de imagem para essa api hospedada, e a api é capaz de enviar os dados de volta para o frontend para serem exibidos na tela
+- A aplicação react manda os dados da câmera em forma de imagem para a API hospedada e a ela envia os dados (número de dedos levantados) de volta para o Frontend para serem exibidos na tela.
