@@ -27,7 +27,7 @@ MediaPipe) e modelos de Machine Learning (TensorFlow, Teachable Machine)
 - Traduzir os sinais reconhecidos para palavras e frases em Língua Portuguesa
 - Mostrar o texto traduzido na tela em tempo real.
 
-### Requisitos Não-Funcionais
+### Requisitos Não Funcionais
 - Realizar a tradução de sinais em tempo real e com precisão
 - Ser compatível com dispositivos Android e iOS
 - A interface deve ser acessível, simples e adequada para diferentes perfis de
